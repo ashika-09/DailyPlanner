@@ -34,3 +34,7 @@ coverage/
 
 # Others
 *.swp
+
+node_modules/
+.env
+
