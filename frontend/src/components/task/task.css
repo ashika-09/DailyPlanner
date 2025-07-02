@@ -1,0 +1,45 @@
+.task{
+    width: 100%;
+    min-height: 100vh;
+    max-height: auto;
+}
+.task-input {
+    border: none;
+    outline: none;
+}
+.task-input-div{
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#textarea{
+    display: none;
+}
+.card{
+    border: 1px solid black;
+}
+.para{
+    text-align: justify;
+    text-justify: inter-word;
+}
+.card-icon{
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.icons.update{
+   color: #28a745;
+}
+
+.icons.delete{
+   color: #dc3545;
+   font-size: 22px;
+}
+.icons.update:hover{
+   color: #218838; 
+}
+.icons.delete:hover{
+    font-size: 22px;
+   color: #c82333; 
+}
+
+
