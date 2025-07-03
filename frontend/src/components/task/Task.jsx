@@ -9,12 +9,10 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 let id = sessionStorage.getItem("id");
+let toupdatearray=[];
 const Task = () => {
   const [Inputs, setInputs] = useState({ title: "", body: "" });
   const [Array, SetArray] = useState([]);
-  
-  
-
 
   const show = () => {
     document.getElementById("textarea").style.display = "block";
@@ -53,10 +51,14 @@ const Task = () => {
     console.log(value);
     document.getElementById("task-update").style.display = value;
   }
+
+   const update=(value)=>{
+    toupdatearray=Array[value];
+  }
   const del = async (cardid) => {
     if(id){
        await axios.delete(`http://localhost:1000/api/v1/deleteTask/${cardid}`, {
-      data:{id:id},
+      data:{ id: id },
   })
     .then(()=>{
     toast.success("Your Task is Deleted",{ autoClose: 2000});
@@ -82,7 +84,6 @@ const Task = () => {
     fetch();
     }else{
       toast.error("Please signup Firse",{ autoClose: 2000});
-   
     }
     
   }, [submit]);
@@ -123,7 +124,10 @@ const Task = () => {
                     body={item.body}
                     id={item._id}
                     delid={del}
-                    display={dis} />
+                    display={dis}
+                    updateid={index} 
+                    tobeupdate={update}
+                    />
                 </div>
               ))}
 
@@ -135,7 +139,7 @@ const Task = () => {
       </div>
       <div className="task-update" id="task-update">
         <div className="container"></div>
-        <Update display={dis} />
+        <Update display={dis} update={toupdatearray}/>
 
       </div>
     </>

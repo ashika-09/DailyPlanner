@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { GrDocumentUpdate } from "react-icons/gr";
 
-const cards = ({ title, body ,id, delid , display}) => {
+const cards = ({ title, body ,id, delid , display, updateid, tobeupdate}) => {
     return (
         <div className="p-3 card">
             <div>
@@ -15,6 +15,7 @@ const cards = ({ title, body ,id, delid , display}) => {
                 <div className="d-flex justify-content align-items-center card-icon update px-2 py-1"
                   onClick={()=>{
                     display("block");
+                    tobeupdate(updateid)
                   }}
                 >
                     <GrDocumentUpdate className="icons update"/>Update

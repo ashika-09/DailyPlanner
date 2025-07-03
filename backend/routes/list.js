@@ -51,18 +51,18 @@ router.put("/updateTask/:id",async (req,res)=>{
   }
 });
 
-router.delete("/deleteTask/:id",async (req,res)=>{
-   try {
-    const { id } = req.body; // user ID
-    const taskId = req.params.id; // task ID
+router.delete("/deleteTask/:taskId", async (req, res) => {
+  try {
+    const { id: userId } = req.body;   // user id
+    const taskId = req.params.taskId;  // task id
 
     const existinguser = await User.findByIdAndUpdate(
-      id,
-      { $pull: { list: taskId } }  // Remove task ID from user's list array
+      userId,
+      { $pull: { list: taskId } }
     );
 
     if (existinguser) {
-      await list.findByIdAndDelete(taskId);
+      await list.findByIdAndDelete(taskId);  // <-- Use taskId here!
       res.status(200).json({ message: "Deleted" });
     } else {
       res.status(404).json({ message: "User not found" });
