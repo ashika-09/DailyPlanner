@@ -7,19 +7,19 @@ router.post("/register", async (req,res)=>{
         const {email,username,password}=req.body;
         const hashpassword=bcrypt.hashSync(password);
         const user=new User({email,username,password:hashpassword});
-        await user.save().then(()=>res.status(200).json({user:user}));
+        await user.save().then(()=>res.status(200).json({message:"SignUp successful"}));
     } catch (error) {
         console.log(error);
-         res.status(400).json({message:"user exist"});
+         res.status(200).json({message:"User already exist"});
     }
 });
 
 //signin
-router.post("/signin", async (req,res)=>{
+router.post("/signin", async (req, res)=>{
     try {
-        const user=await User.findOne({email:req.body.email});
+        const user=await User.findOne({email: req.body.email });
         if(!user){
-            res.status(400).json({message:"Please Sign up first"})
+            res.status(200).json({message:"Please Sign up first"})
         }
 
         const ispasswordcorrect=bcrypt.compareSync(
@@ -28,14 +28,14 @@ router.post("/signin", async (req,res)=>{
         );
 
         if(!ispasswordcorrect){
-            res.status(400).json({message:"Incorrect Password"})
+            res.status(200).json({message:"Incorrect Password"})
         }
        
-        const {password,...others}=user._doc;
-        res.status(200).json({others});
+        const { password,...others } = user._doc;
+         res.status(200).json({ others });
     } catch (error) {
         console.log(error);
-         res.status(400).json({message:"user exist"});
+         res.status(200).json({message: "user already exist"});
     }
 });
 

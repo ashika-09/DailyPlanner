@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import "./signin.css"; // Create this file for styling
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../store";
+
 
 const SignIn = () => {
+  const dispatch=useDispatch();
+  const history=useNavigate();
+  const [Inputs, setInputs]=useState({email:"",password:""});
+      const change=(e)=>{
+          const  {name,value}=e.target;
+          setInputs({...Inputs, [name]:value});
+      }
+      
+      const submit= async(e)=>{
+        e.preventDefault();
+        await axios.post("http://localhost:1000/api/v1/signin", Inputs).then((response)=>{
+         sessionStorage.setItem("id",response.data.others._id);
+         dispatch(authActions.login());
+         history("/task");
+        }).catch((error)=>{
+          console.log("Error:", error.response?.data);
+        })
+      };
   return (
     <div className="signin">
       <div className="container">
@@ -13,17 +36,21 @@ const SignIn = () => {
                 className="p-2 my-3"
                 name="email"
                 type="email"
+                value={Inputs.email}
                 placeholder="Enter your Email Id"
+                onChange={change}
               />
 
               <input
                 className="p-2 my-3"
                 name="password"
                 type="password"
+                value={Inputs.password}
                 placeholder="Enter your Password"
+                onChange={change}
               />
 
-              <button className="btn-signin p-2">Sign In</button>
+              <button className="btn-signin p-2" onClick={submit}>Sign In</button>
             </div>
           </div>
 
