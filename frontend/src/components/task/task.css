@@ -2,6 +2,7 @@
     width: 100%;
     min-height: 100vh;
     max-height: auto;
+    position: relative;
 }
 .task-input {
     border: none;
@@ -21,25 +22,60 @@
     text-align: justify;
     text-justify: inter-word;
 }
-.card-icon{
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-.icons.update{
-   color: #28a745;
+.card-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 6px;
 }
 
-.icons.delete{
-   color: #dc3545;
-   font-size: 22px;
-}
-.icons.update:hover{
-   color: #218838; 
-}
-.icons.delete:hover{
-    font-size: 22px;
-   color: #c82333; 
+.card-icon .icons {
+  margin-right: 5px;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
+.icons.update {
+  color: #28a745;
+}
 
+.icons.delete {
+  color: #dc3545;
+  font-size: 22px;
+}
+
+/* Hover for update container */
+.card-icon.update:hover {
+  background-color: rgba(40, 167, 69, 0.1);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+.card-icon.update:hover .icons.update {
+  color: #218838;
+}
+
+/* Hover for delete container */
+.card-icon.delete:hover {
+  background-color: rgba(220, 53, 69, 0.1);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+  transform: translateY(-2px);
+}
+
+.card-icon.delete:hover .icons.delete {
+  color: #c82333;
+}
+
+.task-update{
+    width: 100%;
+    height: 80vh;
+    position: absolute;
+    position: fixed;
+    top: 80px;
+    left: 0px;
+    background-color: bisque;
+    display: none;
+}
+
+.update{
+    height: 100%;
+}

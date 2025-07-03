@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./task.css";
 import Cards from "./cards";
+import { ToastContainer, toast } from 'react-toastify';
+import Update from "./Update";
 
 const Task = () => {
   const [Inputs, setInputs] = useState({ title: "", body: "" });
@@ -13,11 +15,29 @@ const Task = () => {
     setInputs({ ...Inputs, [name]: value });
   };
   const submit = () => {
+    if (!Inputs.title.trim() || !Inputs.body.trim()) {
+    toast.error("Please fill in both Title and Body.");
+    return;
+  } else{
     SetArray([...Array, Inputs]);
     setInputs({ title: "", body: "" });
+    toast.success("Your Task is Added");
+    toast.error("Your Task is Not Saved Yet, Please Sign Up First");
+  }
   };
+  const dis=(value)=>{
+    console.log(value);
+    document.getElementById("task-update").style.display=value;
+  }
+  const del=(id)=>{
+   console.log(id);
+   Array.splice(id,"1");
+   SetArray([...Array]);
+  }
   return (
+    <>
     <div className="task">
+      <ToastContainer/>
       <div className="main-task container d-flex justify-content-center align-items-center flex-column my-4">
         <div className="d-flex flex-column task-input-div w-50 p-1">
           <input type="text"
@@ -46,8 +66,12 @@ const Task = () => {
         <div className="container-fluid">
           <div className="row">
             {Array && Array.map((item, index) => (
-              <div className="col-lg-3 mx-5 my-2 col-10">
-                <Cards title={item.title} body={item.body}/>
+              <div className="col-lg-3 mx-5 my-2 col-10" key={index}>
+                <Cards  title={item.title} 
+                        body={item.body} 
+                        id={index} 
+                        delid={del} 
+                        display={dis} />
               </div>
             ))}
 
@@ -57,8 +81,12 @@ const Task = () => {
 
       </div>
     </div>
+    <div className="task-update" id="task-update">
+      <div className="container"></div>
+      <Update display={dis} />
 
-
+    </div>
+    </>
   );
 }
 export default Task;

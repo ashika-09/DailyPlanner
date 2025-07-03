@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { GrDocumentUpdate } from "react-icons/gr";
 
-const cards = ({ title, body }) => {
+const cards = ({ title, body ,id, delid , display}) => {
     return (
         <div className="p-3 card">
             <div>
@@ -12,10 +12,18 @@ const cards = ({ title, body }) => {
                 </p>
             </div>
             <div className="d-flex gap-3 ">
-                <div className="d-flex justify-content align-items-center card-icon px-2 py-1">
+                <div className="d-flex justify-content align-items-center card-icon update px-2 py-1"
+                  onClick={()=>{
+                    display("block");
+                  }}
+                >
                     <GrDocumentUpdate className="icons update"/>Update
                 </div>
-               <div className="d-flex justify-content text-danger align-items-center card-icon px-2 py-1">
+               <div className="d-flex justify-content text-danger align-items-center card-icon delete px-2 py-1"
+               onClick={()=>{
+                delid(id);
+               }}
+               >
                 <AiFillDelete className="icons delete "/>Delete
                 </div> 
             </div>
