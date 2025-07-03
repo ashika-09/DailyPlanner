@@ -1,11 +1,12 @@
 const router=require("express").Router();
 const User=require("../models/user");
 const List=require("../models/list");
+const list = require("../models/list");
 
 router.post("/addTask",async (req,res)=>{
    try {
-    const {title,body,email}=req.body;
-    const existinguser=await User.findOne({email});
+    const {title,body,id}=req.body;
+    const existinguser=await User.findById(id);
     if (!existinguser) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -50,21 +51,22 @@ router.put("/updateTask/:id",async (req,res)=>{
   }
 });
 
-router.put("/deleteTask/:id",async (req,res)=>{
+router.delete("/deleteTask/:id",async (req,res)=>{
    try {
-    const { title, body } = req.body;
+    const { id } = req.body; // user ID
+    const taskId = req.params.id; // task ID
 
-    const updatedList = await List.findByIdAndDelete(
-      req.params.id,
-      { title, body },
-      { new: true }
+    const existinguser = await User.findByIdAndUpdate(
+      id,
+      { $pull: { list: taskId } }  // Remove task ID from user's list array
     );
 
-    if (!updatedList) {
-      return res.status(404).json({ message: "Task not found" });
+    if (existinguser) {
+      await list.findByIdAndDelete(taskId);
+      res.status(200).json({ message: "Deleted" });
+    } else {
+      res.status(404).json({ message: "User not found" });
     }
-
-    return res.status(200).json({ message: "Deleted" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Something went wrong" });

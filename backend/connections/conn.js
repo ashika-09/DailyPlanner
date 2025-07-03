@@ -8,7 +8,7 @@ const conn=async (req,res)=>{
     console.log("mongodb connected");
   })
  }catch(error){
-  res.staus(404).json({
+  res.status(404).json({
     message:"db not connected"
   })
  }
