@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import BASE_URL from "../../utils/url";
 
 let id = sessionStorage.getItem("id");
 let toupdatearray=[];
@@ -24,12 +25,13 @@ const Task = () => {
   };
 
   const submit = async () => {
+    
     if (!Inputs.title.trim() || !Inputs.body.trim()) {
       toast.error("Please fill in both Title and Body.",{ autoClose: 2000});
       return;
     } else {
       if (id) {
-        await axios.post("http://localhost:1000/api/v1/addTask", { title: Inputs.title, body: Inputs.body, id: id }).then((response) => {
+        await axios.post(`${BASE_URL}/api/v1/addTask`, { title: Inputs.title, body: Inputs.body, id: id }).then((response) => {
           console.log(response);
         }).catch((error) => {
           console.log("API error:", error);
@@ -57,7 +59,7 @@ const Task = () => {
   }
   const del = async (cardid) => {
     if(id){
-       await axios.delete(`http://localhost:1000/api/v1/deleteTask/${cardid}`, {
+       await axios.delete(`${BASE_URL}/api/v1/deleteTask/${cardid}`, {
       data:{ id: id },
   })
     .then(()=>{
@@ -76,7 +78,7 @@ const Task = () => {
   useEffect(()=>{
     if(id){
       const fetch= async ()=>{
-      await axios.get(`http://localhost:1000/api/v1/gettask/${id}`)
+      await axios.get(`${BASE_URL}/api/v1/gettask/${id}`)
       .then((response)=>{
           SetArray(response.data.list);
       });

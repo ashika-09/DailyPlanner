@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
+import BASE_URL from "../../utils/url";
 const Update = ({display , update}) => {
 
     
@@ -14,7 +14,7 @@ const Update = ({display , update}) => {
     
     const submit = async()=>{
         console.log(update._id);
-        await axios.put(`http://localhost:1000/api/v1/updateTask/${update._id}`,Inputs)
+        await axios.put(`${BASE_URL}/api/v1/updateTask/${update._id}`,Inputs)
         .then((response)=>{
            toast.success("Your Task is Updated",{ autoClose: 2000});
         });

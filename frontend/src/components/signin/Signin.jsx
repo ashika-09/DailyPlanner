@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
-
+import BASE_URL from "../../utils/url";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const SignIn = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:1000/api/v1/signin", Inputs).then((response) => {
+    await axios.post(`${BASE_URL}/api/v1/signin`, Inputs).then((response) => {
       sessionStorage.setItem("id", response.data.others._id);
       dispatch(authActions.login());
       history("/task");

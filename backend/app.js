@@ -7,9 +7,6 @@ const list=require("./routes/list");
 app.use(cors());
 app.use(express.json());
 
-app.put("/",(req,res)=>{
-    res.send("hello");
-})
 
 app.use("/api/v1",auth);
 app.use("/api/v1",list);
