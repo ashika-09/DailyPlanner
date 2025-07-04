@@ -3,10 +3,7 @@ import "./task.css";
 import Cards from "./cards";
 import { ToastContainer, toast } from 'react-toastify';
 import Update from "./Update";
-import { useDispatch } from "react-redux";
-import { authActions } from "../../store";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import BASE_URL from "../../utils/url";
 
 let id = sessionStorage.getItem("id");
