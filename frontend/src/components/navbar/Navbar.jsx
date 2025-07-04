@@ -1,17 +1,21 @@
 import React from "react";
 import "./navbar.css";
 import { LuNotebookPen } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../store";
 
+
 const Navbar=()=>{
+    const history=useNavigate();
     const dispatch=useDispatch();
     const isLoggedIn=useSelector((state)=>state.isLoggedIn);
     const logout =()=>{
-        sessionStorage.clear("id");
+        
+        sessionStorage.removeItem("id");
      dispatch(authActions.logout());
+     history("/");
     }
     return (
  <div> 
@@ -28,7 +32,7 @@ const Navbar=()=>{
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item mx-2">
-                <Link className="nav-Link active" aria-current="page" to="#" >Home</Link>
+                <Link className="nav-Link active" aria-current="page" to="/" >Home</Link>
                 </li>  
 
                 <li className="nav-item mx-2">
@@ -39,20 +43,28 @@ const Navbar=()=>{
                 <Link className="nav-Link active" aria-current="page" to="/task">Task</Link>
                 </li>  
                {!isLoggedIn && <>
-               <li className="nav-item mx-2 p-1">
+               <div className="d-flex  p-lg-0 p-2">
+                 <li className="nav-item mx-2 p-1">
                 <Link className="nav-Link active btn-nav" aria-current="page" to="/signup">Sign Up</Link>
-                </li>  
- 
-                <li className="nav-item mx-2 p-1"> 
+                </li> 
+               </div>
+               
+                <div className="d-flex  p-lg-0 p-2">
+                    <li className="nav-item mx-2 p-1"> 
                 <Link className="nav-Link active btn-nav" aria-current="page" to="/signin">Sign In</Link>
-                </li>  
+                </li>
+                </div>
+                  
                </>}
                 
                 {isLoggedIn && <>
-                  <li className="nav-item mx-2 p-1"> 
+                <div className="d-flex p-lg-0 p-2">
+                     <li className="nav-item mx-2 p-1"> 
                 <Link className="nav-Link active btn-nav" aria-current="page" to="#" onClick={logout}>Log Out</Link>
                 
-                </li>   
+                </li> 
+                </div>
+                   
                 </>}
  
               

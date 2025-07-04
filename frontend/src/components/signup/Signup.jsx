@@ -18,6 +18,7 @@ const Signup=()=>{
          alert(response.data.message);
         }else{
             alert(response.data.message);
+             sessionStorage.removeItem("id");
             setInputs({email:"", username:"",password:""});
             history("/signin");
         }

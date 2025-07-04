@@ -13,7 +13,7 @@ const Update = ({display , update}) => {
     }
     
     const submit = async()=>{
-        console.log(update.id);
+        console.log(update._id);
         await axios.put(`http://localhost:1000/api/v1/updateTask/${update._id}`,Inputs)
         .then((response)=>{
            toast.success("Your Task is Updated",{ autoClose: 2000});

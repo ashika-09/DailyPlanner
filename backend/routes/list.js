@@ -1,7 +1,7 @@
 const router=require("express").Router();
 const User=require("../models/user");
-
-const list = require("../models/list");
+const List = require("../models/list");
+//const list = require("../models/list");
 
 router.post("/addTask",async (req,res)=>{
    try {
@@ -62,7 +62,7 @@ router.delete("/deleteTask/:taskId", async (req, res) => {
     );
 
     if (existinguser) {
-      await list.findByIdAndDelete(taskId);  // <-- Use taskId here!
+      await List.findByIdAndDelete(taskId);  // <-- Use taskId here!
       res.status(200).json({ message: "Deleted" });
     } else {
       res.status(404).json({ message: "User not found" });
