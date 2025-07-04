@@ -92,7 +92,7 @@ const Task = () => {
       <div className="task">
         <ToastContainer />
         <div className="main-task container d-flex justify-content-center align-items-center flex-column my-4">
-          <div className="d-flex flex-column task-input-div w-50 p-1">
+          <div className="d-flex flex-column task-input-div w-100 p-1">
             <input type="text"
               placeholder="Tile"
               className="my-2 p-2 task-input"
@@ -111,7 +111,7 @@ const Task = () => {
               className=" p-2 task-input" />
 
           </div>
-          <div className="w-50 d-flex justify-content-end m-3">
+          <div className="w-100 w-lg-50 d-flex justify-content-end m-3">
             <button className="home-btn px-4 py-2" onClick={submit}>Add Task</button>
           </div>
         </div>
@@ -119,7 +119,7 @@ const Task = () => {
           <div className="container-fluid">
             <div className="row">
               {Array && Array.map((item, index) => (
-                <div className="col-lg-3 mx-5 my-2 col-10" key={index}>
+                <div className="col-lg-3 mx-lg-5 mx-3 my-2 col-11" key={index}>
                   <Cards title={item.title}
                     body={item.body}
                     id={item._id}

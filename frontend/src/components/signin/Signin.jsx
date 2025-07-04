@@ -7,31 +7,40 @@ import { authActions } from "../../store";
 
 
 const SignIn = () => {
-  const dispatch=useDispatch();
-  const history=useNavigate();
-  const [Inputs, setInputs]=useState({email:"",password:""});
-      const change=(e)=>{
-          const  {name,value}=e.target;
-          setInputs({...Inputs, [name]:value});
-      }
-      
-      const submit= async(e)=>{
-        e.preventDefault();
-        await axios.post("http://localhost:1000/api/v1/signin", Inputs).then((response)=>{
-         sessionStorage.setItem("id",response.data.others._id);
-         dispatch(authActions.login());
-         history("/task");
-        }).catch((error)=>{
-          console.log("Error:", error.response?.data);
-        })
-      };
+  const dispatch = useDispatch();
+  const history = useNavigate();
+  const [Inputs, setInputs] = useState({ email: "", password: "" });
+  const change = (e) => {
+    const { name, value } = e.target;
+    setInputs({ ...Inputs, [name]: value });
+  }
+
+  const submit = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:1000/api/v1/signin", Inputs).then((response) => {
+      sessionStorage.setItem("id", response.data.others._id);
+      dispatch(authActions.login());
+      history("/task");
+    }).catch((error) => {
+      console.log("Error:", error.response?.data);
+    })
+  };
   return (
     <div className="signin">
       <div className="container">
         <div className="row">
           {/* Left side: Form */}
           <div className="col-lg-8 column d-flex justify-content-center align-items-center">
-            <div className="d-flex flex-column w-100 p-5">
+            <div className="d-flex flex-column w-100 p-3">
+             <div>
+               <h2 className="mb-2 text-center heading-signin">
+                👋 Welcome Back!
+              </h2>
+
+              <p className="mb-4 text-center signin-description">
+                Sign in to stay on top of your tasks and make every day productive!
+              </p>
+             </div>
               <input
                 className="p-2 my-3"
                 name="email"
@@ -55,10 +64,10 @@ const SignIn = () => {
           </div>
 
           {/* Right side: Image */}
-          <div className="col-lg-4 column col-left d-flex justify-content-center align-items-center">
+          <div className="d-lg-block d-none col-lg-4 column col-left d-flex justify-content-center align-items-center">
             <img
               src="https://st5.depositphotos.com/4678277/76721/i/600/depositphotos_767211264-stock-photo-vertical-photo-collage-serious-man.jpg"
-                    alt="/"
+              alt="/"
               className="img-fluid signin-image"
             />
           </div>

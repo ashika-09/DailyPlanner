@@ -16,5 +16,9 @@
 }
 .nav-Link {
   text-decoration: none;
+  color: black;
   color: inherit; 
+}
+.nav-Link:hover {
+  color:  rgb(227, 69, 11);
 }

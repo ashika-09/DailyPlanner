@@ -20,8 +20,8 @@ const Navbar=()=>{
     return (
  <div> 
         <nav className="navbar navbar-expand-lg ">
-        <div className="container">
-            <Link className="navbar-brand" to="#"><b>
+        <div className="container ">
+            <Link className="navbar-brand " to="#"><b>
                 <LuNotebookPen /> &nbsp;  DAILY PLANNER
                 </b>
                 </Link>
