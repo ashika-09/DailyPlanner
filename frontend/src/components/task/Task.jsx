@@ -66,7 +66,7 @@ const Task = () => {
     })
 
     }else{
-      toast.error("Please signup Firse",{ autoClose: 2000});
+      toast.error("Please signup First",{ autoClose: 2000});
    
     }
    
@@ -83,7 +83,7 @@ const Task = () => {
     };
     fetch();
     }else{
-      toast.error("Please signup Firse",{ autoClose: 2000});
+      toast.error("Please signup First",{ autoClose: 2000});
     }
     
   }, [submit]);
